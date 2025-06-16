@@ -1,0 +1,14 @@
+.create-board-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+
+.create-board-button{
+    padding: 10px 26px;
+    background: #28a745;
+    color: black;
+    border-radius: 25px;
+    cursor: pointer;
+}
