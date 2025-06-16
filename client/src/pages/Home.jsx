@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import BoardFilter from "../components/BoardFilter";
 import SearchBar from "../components/SearchBar";
 import CreateBoardButton from '../components/CreateBoardButton';
+import BoardGrid from '../components/BoardGrid';
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -22,6 +23,52 @@ const Home = () => {
       />
 
           <CreateBoardButton onClick={()=> console.log("hahaha")}/> 
+
+
+             <BoardGrid
+        boards={[
+          {
+            title: "ana's Bd",
+            category: "Thank you",
+            imgURL:
+              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
+            onView: () => console.log("Hahah"),
+            onDelete: () => console.log("Hahah"),
+          },
+          {
+            title: "ana's Bd",
+            category: "Thank you",
+            imgURL:
+              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
+            onView: () => console.log("Hahah"),
+            onDelete: () => console.log("Hahah"),
+          },
+          {
+            title: "ana's Bd",
+            category: "Thank you",
+            imgURL:
+              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
+            onView: () => console.log("Hahah"),
+            onDelete: () => console.log("Hahah"),
+          },
+          {
+            title: "ana's Bd",
+            category: "Thank you",
+            imgURL:
+              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
+            onView: () => console.log("Hahah"),
+            onDelete: () => console.log("Hahah"),
+          },
+          {
+            title: "ana's Bd",
+            category: "Thank you",
+            imgURL:
+              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
+            onView: () => console.log("Hahah"),
+            onDelete: () => console.log("Hahah"),
+          },
+        ]}
+      ></BoardGrid>
     </div>
   );
 };
