@@ -5,13 +5,13 @@ import BoardCard from "../components/BoardCard";
 import BoardGrid from "../components/BoardGrid";
 import Header from "../components/Header";
 import CreateBoardButton from "../components/CreateBoardButton";
-
+import CreateBoardModal from "../components/CreateBoardModal";
 const Home = () => {
 
   console.log("h0ome is loading");
 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [showCreateBoard, setShowCreateBoard] = useState(true);
+  const [showCreateBoard, setShowCreateBoard] = useState(false);
 
 
   // gotta have a state after backend is ready to save the boards;
@@ -29,7 +29,9 @@ const Home = () => {
         selectedCategory={selectedCategory}
         onSelect={setSelectedCategory}
       />
-      <CreateBoardButton onClick={()=> console.log("hahaha")}/> 
+      <CreateBoardButton onClick={()=> setShowCreateBoard(true)}/> 
+
+     { showCreateBoard && (<CreateBoardModal onClose={()=> setShowCreateBoard(false)}></CreateBoardModal>)}
 
       {/* <BoardGrid boards = {[]}></BoardGrid> */}
       <BoardGrid
