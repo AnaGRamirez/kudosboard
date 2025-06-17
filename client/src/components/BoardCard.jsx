@@ -1,6 +1,7 @@
 import React from "react";
  import {Link} from 'react-router-dom';
 import "./BoardCard.css";
+import BoardPage from "../pages/BoardPage";
 import { useNavigate } from "react-router-dom";
 const BoardCard = ({
   id,

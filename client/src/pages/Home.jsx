@@ -1,31 +1,38 @@
-import React, {useState} from 'react';
-import Header from "../components/Header";
+import React, {useState} from "react";
 import BoardFilter from "../components/BoardFilter";
 import SearchBar from "../components/SearchBar";
-import CreateBoardButton from '../components/CreateBoardButton';
-import BoardGrid from '../components/BoardGrid';
+import BoardCard from "../components/BoardCard";
+import BoardGrid from "../components/BoardGrid";
+import Header from "../components/Header";
+import CreateBoardButton from "../components/CreateBoardButton";
 
 const Home = () => {
+
+  console.log("h0ome is loading");
+
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showCreateBoard, setShowCreateBoard] = useState(true);
+
+
   // gotta have a state after backend is ready to save the boards;
   const handleSearch = (query) => {
     //todo:backend first
     console.log("you are searching for ", query);
   };
 
+
   return (
     <div>
       <Header></Header>
-   <SearchBar onSearch={handleSearch}></SearchBar>
-        <BoardFilter
+      <SearchBar onSearch={handleSearch}></SearchBar>
+      <BoardFilter
         selectedCategory={selectedCategory}
         onSelect={setSelectedCategory}
       />
+      <CreateBoardButton onClick={()=> console.log("hahaha")}/> 
 
-          <CreateBoardButton onClick={()=> console.log("hahaha")}/> 
-
-
-             <BoardGrid
+      {/* <BoardGrid boards = {[]}></BoardGrid> */}
+      <BoardGrid
         boards={[
           {
             title: "ana's Bd",
