@@ -1,19 +1,9 @@
 const prisma = require("./client");
 
-async function getBoards(filter) {
-  let whereClause = {};
+async function getBoards() {
   let orderBy = {id: "asc"};
 
-  if (["Celebration", "Thank You", "Inspiration"].includes(filter)) {
-    whereClause = filter;
-  }
-
-  if (filter === "Recent") {
-    orderBy = {createdAt: "desc"};
-  }
-
   return await prisma.boards.findMany({
-    where: whereClause,
     orderBy,
   });
 }

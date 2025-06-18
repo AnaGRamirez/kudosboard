@@ -6,20 +6,38 @@ import BoardGrid from "../components/BoardGrid";
 import Header from "../components/Header";
 import CreateBoardButton from "../components/CreateBoardButton";
 import CreateBoardModal from "../components/CreateBoardModal";
+import {fetchBoards} from "../api/BoardApi";
+import {useEffect} from "react";
+
 const Home = () => {
-
-  console.log("h0ome is loading");
-
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showCreateBoard, setShowCreateBoard] = useState(false);
+  const [boards, setBoards] = useState([]);
 
+
+  useEffect(() => {
+    console.log("entering useeffect ");
+    const getAllBoards = async () => {
+      try {
+        const allboards = await fetchBoards();
+        console.log(allboards, "ahaah");
+        setBoards(allboards);
+      } catch (error) {
+        console.log("what is this?", error);
+      }
+    };
+      getAllBoards();
+  },[]);
+
+  useEffect(() => {
+      console.log('boards: ', boards)
+  },[boards]);
 
   // gotta have a state after backend is ready to save the boards;
   const handleSearch = (query) => {
     //todo:backend first
     console.log("you are searching for ", query);
   };
-
 
   return (
     <div>
@@ -29,55 +47,15 @@ const Home = () => {
         selectedCategory={selectedCategory}
         onSelect={setSelectedCategory}
       />
-      <CreateBoardButton onClick={()=> setShowCreateBoard(true)}/> 
+      <CreateBoardButton onClick={() => setShowCreateBoard(true)} />
 
-     { showCreateBoard && (<CreateBoardModal onClose={()=> setShowCreateBoard(false)}></CreateBoardModal>)}
+      {showCreateBoard && (
+        <CreateBoardModal
+          onClose={() => setShowCreateBoard(false)}
+        ></CreateBoardModal>
+      )}
 
-      {/* <BoardGrid boards = {[]}></BoardGrid> */}
-      <BoardGrid
-        boards={[
-          {
-            title: "ana's Bd",
-            category: "Thank you",
-            imgURL:
-              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
-            onView: () => console.log("Hahah"),
-            onDelete: () => console.log("Hahah"),
-          },
-          {
-            title: "ana's Bd",
-            category: "Thank you",
-            imgURL:
-              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
-            onView: () => console.log("Hahah"),
-            onDelete: () => console.log("Hahah"),
-          },
-          {
-            title: "ana's Bd",
-            category: "Thank you",
-            imgURL:
-              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
-            onView: () => console.log("Hahah"),
-            onDelete: () => console.log("Hahah"),
-          },
-          {
-            title: "ana's Bd",
-            category: "Thank you",
-            imgURL:
-              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
-            onView: () => console.log("Hahah"),
-            onDelete: () => console.log("Hahah"),
-          },
-          {
-            title: "ana's Bd",
-            category: "Thank you",
-            imgURL:
-              "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXljMnhmOWZkcmhkZWpqd3lidzR3bmFzdmdhZjdxZTMycHRxYzJzYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VeT5jhseHD0W3dI7de/giphy.gif",
-            onView: () => console.log("Hahah"),
-            onDelete: () => console.log("Hahah"),
-          },
-        ]}
-      ></BoardGrid>
+      <BoardGrid boards={boards}></BoardGrid>
     </div>
   );
 };

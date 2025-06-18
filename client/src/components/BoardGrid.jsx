@@ -4,13 +4,15 @@ import "./BoardGrid.css";
 
 const BoardGrid = ({boards}) => {
   const renderCards = () => {
+    // console.log("this is what a board looks like", boards)
+
     return boards.map((board, index) => (
       <BoardCard
         key={index}
-        id= {index}
+        id= {board.id}
         title={board.title}
         category={board.category}
-        imgURL={board.imgURL}
+        imgURL={board.imageurl}
         onView={() => console.log("you are vieweing board ", index)}
         onDelete={() => console.log("you are deleting board ", index)}
       ></BoardCard>

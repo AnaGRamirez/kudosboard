@@ -12,11 +12,10 @@ const {
 } = require("../prisma/board.js");
 
 router.get("/", async (req, res) => {
-  const filter = req.body;
-  console.log("filter", filter);
 
   try {
-    const boards = await getBoards(filter);
+    const boards = await getBoards();
+    console.log("boards", boards)
     res.json(boards);
   } catch (error) {
     console.log("did not fetch", error);
