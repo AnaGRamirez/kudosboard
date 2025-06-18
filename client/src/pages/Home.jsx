@@ -6,14 +6,13 @@ import BoardGrid from "../components/BoardGrid";
 import Header from "../components/Header";
 import CreateBoardButton from "../components/CreateBoardButton";
 import CreateBoardModal from "../components/CreateBoardModal";
-import {fetchBoards} from "../api/BoardApi";
+import {fetchBoards, createBoard} from "../api/BoardApi";
 import {useEffect} from "react";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showCreateBoard, setShowCreateBoard] = useState(false);
   const [boards, setBoards] = useState([]);
-
 
   useEffect(() => {
     console.log("entering useeffect ");
@@ -26,18 +25,30 @@ const Home = () => {
         console.log("what is this?", error);
       }
     };
-      getAllBoards();
-  },[]);
+    getAllBoards();
+  }, []);
 
   useEffect(() => {
-      console.log('boards: ', boards)
-  },[boards]);
+    console.log("boards: ", boards);
+  }, [boards]);
 
   // gotta have a state after backend is ready to save the boards;
   const handleSearch = (query) => {
     //todo:backend first
     console.log("you are searching for ", query);
   };
+
+const handleCreateBoard = (boardDetails) => {
+  const createBoardAsync = async () => {
+    try {
+      const createdBoard = await createBoard(boardDetails);
+      setBoards((prevBoards) => [...prevBoards, createdBoard]);
+    } catch (error) {
+      console.error("Error creating board:", error);
+    }
+  };
+  createBoardAsync();
+}
 
   return (
     <div>
@@ -52,6 +63,7 @@ const Home = () => {
       {showCreateBoard && (
         <CreateBoardModal
           onClose={() => setShowCreateBoard(false)}
+          onCreate={handleCreateBoard}
         ></CreateBoardModal>
       )}
 

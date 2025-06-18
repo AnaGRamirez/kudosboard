@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import "./CreateBoardModal.css";
 
-const CreateBoardModal = ({onClose}) => {
+const CreateBoardModal = ({onClose, onCreate}) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [author, setAuthor] = useState("");
+  var imageurl = "https://picsum.photos/200/300?random=197";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,7 +16,9 @@ const CreateBoardModal = ({onClose}) => {
     }
 
     // TODO: Add submision logic here
-    console.log("logic here");
+    const data = {title, imageurl, author, category};
+    onCreate(data); 
+    onClose();
   };
 
   return (
@@ -50,14 +53,15 @@ const CreateBoardModal = ({onClose}) => {
         </select>
         <label>Author:</label>
         <input
-        type="text"
-        value={author}
-        onChange={(e)=> setAuthor(e.target.value)}
-        >
+          type="text"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+        ></input>
 
-        </input>
-
-          <button className="submit" type="submit" > Create Board</button>
+        <button className="submit" type="submit">
+          {" "}
+          Create Board
+        </button>
       </form>
     </div>
   );
