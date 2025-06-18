@@ -1,20 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-prisma = require("../prisma/client")
+prisma = require("../prisma/client");
 
-
-
-prisma = require('')
+prisma = require("../prisma/client");
 const {
   getBoards,
   getBoardById,
   createBoard,
   deleteBoard,
-} = require("../prisma/board");
+} = require("../prisma/board.js");
 
 router.get("/", async (req, res) => {
-  const {filter} = req.body;
+  const filter = req.body;
+  console.log("filter", filter);
 
   try {
     const boards = await getBoards(filter);
@@ -27,6 +26,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
+  console.log("thisss rann");
   try {
     const board = await getBoardById(id);
     if (board) {
@@ -58,7 +58,10 @@ router.delete("/", async (req, res) => {
   }
   try {
     await deleteBoard(id);
+    res.status(200).send("board deleteed")
   } catch (error) {
     res.status(500).send("could not delete this board", error);
   }
 });
+
+module.exports = router;
