@@ -24,25 +24,25 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
   - [ ] For each board displayed, users can see:
     - [x] An image/gif
     - [x] A board title
-- [ ] **Filter Boards**
-  - [ ] Home page includes navigation bar, drop down, or some other mechanism which allows users to filter boards by the following categories:
-    - [ ] All/Home (displays all boards)
-    - [ ] Recent (displays the 6 most recently created boards)
-    - [ ] Celebration
-    - [ ] Thank you
-    - [ ] Inspiration
-  - [ ] When a category is clicked, boards matching the specified category are displayed.
+- [x] **Filter Boards**
+  - [x] Home page includes navigation bar, drop down, or some other mechanism which allows users to filter boards by the following categories:
+    - [x] All/Home (displays all boards)
+    - [x] Recent (displays the 6 most recently created boards)
+    - [x] Celebration
+    - [x] Thank you
+    - [x] Inspiration
+  - [x] When a category is clicked, boards matching the specified category are displayed.
 - [ ] **Search Functionality**
-  - [ ] Users can use a search bar to search for boards by title on the home page.
-  - [ ] The search bar should include:
-    - [ ] Text input field
-    - [ ] Submit/Search Button
-    - [ ] Clear Mechanism
-  - [ ] Boards with a title containing the search query in the text input field are displayed in a grid view when the user:
-    - [ ] Presses the Enter key
-    - [ ] Clicks the Submit/Search button 
-  - [ ] User can delete all text from the text input field. 
-  - [ ] When all text is cleared from the text input field, all boards are displayed in a grid view
+  - [x] Users can use a search bar to search for boards by title on the home page.
+  - [x] The search bar should include:
+    - [x] Text input field
+    - [x] Submit/Search Button
+    - [x] Clear Mechanism
+  - [x] Boards with a title containing the search query in the text input field are displayed in a grid view when the user:
+    - [x] Presses the Enter key
+    - [x] Clicks the Submit/Search button 
+  - [x] User can delete all text from the text input field. 
+  - [x] When all text is cleared from the text input field, all boards are displayed in a grid view
 - [ ] **View Board** 
   - [ ] Users can click on a board in the grid view to navigate to a new page containing that board's details.
 - [ ] **Add New Board**
@@ -53,9 +53,9 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
     - [x] Author (optional)
   - [x] Items listed as required above must have a value to succesffuly create a new board.
   - [x] When the board is successfully created, it appears in the grid of boards. 
-- [ ] **Delete Board**
-  - [ ] User can delete boards on the home page. 
-  - [ ] When the board is deleted, the board disappears from the grid of boards. 
+- [x] **Delete Board**
+  - [x] User can delete boards on the home page. 
+  - [x] When the board is deleted, the board disappears from the grid of boards. 
 
 ##### Board Page
 

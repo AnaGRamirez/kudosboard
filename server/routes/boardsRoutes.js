@@ -9,13 +9,13 @@ const {
   getBoardById,
   createBoard,
   deleteBoard,
+  searchBoardsByTitle,
 } = require("../prisma/board.js");
 
 router.get("/", async (req, res) => {
-
   try {
     const boards = await getBoards();
-    console.log("boards", boards)
+    console.log("boards", boards);
     res.json(boards);
   } catch (error) {
     console.log("did not fetch", error);
@@ -57,9 +57,21 @@ router.delete("/", async (req, res) => {
   }
   try {
     await deleteBoard(id);
-    res.status(200).send("board deleteed")
+    res.status(200).send("board deleteed");
   } catch (error) {
     res.status(500).send("could not delete this board", error);
+  }
+});
+
+router.post("/search", async (req, res) => {
+  const {query} = req.body;
+
+  try {
+    const boards = await searchBoardsByTitle(query);
+    res.json(boards);
+  } catch (error) {
+    console.log("search error", error);
+    res.status(500).json({error: "failed to search boards"});
   }
 });
 

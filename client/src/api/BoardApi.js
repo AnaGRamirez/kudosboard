@@ -54,3 +54,18 @@ export async function deleteBoard(id) {
     throw error;
   }
 }
+
+export async function searchBoards(query) {
+  const res = await fetch(`${BASE_URL}/boards/search`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({query}),
+  });
+  if (!res.ok) {
+    throw error;
+  }
+
+  return await res.json();
+}

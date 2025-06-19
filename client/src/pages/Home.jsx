@@ -6,13 +6,15 @@ import BoardGrid from "../components/BoardGrid";
 import Header from "../components/Header";
 import CreateBoardButton from "../components/CreateBoardButton";
 import CreateBoardModal from "../components/CreateBoardModal";
-import {fetchBoards, createBoard, deleteBoard} from "../api/BoardApi";
+import {fetchBoards, createBoard, deleteBoard, searchBoards} from "../api/BoardApi";
 import {useEffect} from "react";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showCreateBoard, setShowCreateBoard] = useState(false);
+  const [allBoards, setAllBoards] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     console.log("entering useeffect ");
@@ -20,7 +22,7 @@ const Home = () => {
       try {
         const allboards = await fetchBoards();
         console.log(allboards, "ahaah");
-        setBoards(allboards);
+        setAllBoards(allboards);
       } catch (error) {
         console.log("what is this?", error);
       }
@@ -30,19 +32,32 @@ const Home = () => {
 
   useEffect(() => {
     console.log("boards: ", boards);
-  }, [boards]);
+  }, [allBoards]);
 
   // gotta have a state after backend is ready to save the boards;
-  const handleSearch = (query) => {
-    //todo:backend first
-    console.log("you are searching for ", query);
+  const handleSearch = async (query) => {
+
+    setSearchQuery(query);
+
+    if (query.trim() ===""){
+      setBoards(allBoards);
+      return;
+    }
+
+    try{
+      const results = await searchBoards(query);
+      setBoards(results);
+    }
+    catch(error){
+      console.log("couldn't search", error);
+    }
   };
 
   const handleCreateBoard = (boardDetails) => {
     const createBoardAsync = async () => {
       try {
         const createdBoard = await createBoard(boardDetails);
-        setBoards((prevBoards) => [...prevBoards, createdBoard]);
+        setAllBoards((prevBoards) => [...prevBoards, createdBoard]);
       } catch (error) {
         console.error("Error creating board:", error);
       }
@@ -57,11 +72,39 @@ const Home = () => {
       return;
     try {
       await deleteBoard(id);
-      setBoards((prev) => prev.filter((board) => board.id !== id));
+      setAllBoards((prev) => prev.filter((board) => board.id !== id));
     } catch (error) {
       console.log("error deleting", error);
     }
   };
+
+  useEffect(() => {
+    const applyFilter = () => {
+      let filtered = [...allBoards];
+
+      switch (selectedCategory) {
+        case "All":
+          break; //no filter
+
+        case "Recent":
+          filtered.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+
+          break;
+
+        case "Celebration":
+        case "Thank You":
+        case "Inpiration":
+          filtered = filtered.filter(
+            (board) => board.category === selectedCategory
+          );
+          break;
+      }
+      setBoards(filtered);
+    };
+    applyFilter();
+  }, [selectedCategory, allBoards]);
 
   return (
     <div>

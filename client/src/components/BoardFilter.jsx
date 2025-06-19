@@ -12,7 +12,7 @@ const BoardFilter = ({selectedCategory, onSelect}) => {
         <button
           key={category}
           className={`filter ${selectedCategory === category ? "active" : ""}`}
-          onClick={() => onselect(category)}
+          onClick={() => onSelect(category)}
         >
           {category}
         </button>

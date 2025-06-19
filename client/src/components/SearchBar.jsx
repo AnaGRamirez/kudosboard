@@ -2,15 +2,15 @@ import React, {useState} from "react";
 import "./SearchBar.css";
 
 const SearchBar = ({onSearch}) => {
-  const [query, setQuery] = useState("");
+  const [input, setInput] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSearch(query);
+    onSearch(input);
   };
 
   const handleClear = () => {
-    setQuery("");
+    setInput("");
     onSearch("");
   };
 
@@ -18,8 +18,15 @@ const SearchBar = ({onSearch}) => {
     <form className="search-bar" onSubmit={handleSubmit} name="searchbar">
       <input
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={input}
+        onChange={(e) => {
+          const value = e.target.value;
+          setInput(value);
+
+          if (value === "") {
+            onSearch("");
+          }
+        }}
         placeholder="serch for a board"
         className="search-input"
       ></input>

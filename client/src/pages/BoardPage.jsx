@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { use, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 
 const BoardPage = () => {
     const {boardId} = useParams();
+    const [cards, setCards] = useState([])
 
-    return (
-        <div >
-            <h1>
-                "Hi thanks for visiting" {boardId}
-            </h1>
-        </div>
+    // useEffect(() => {
+    //     const fetchCards = async () => {
+    //         try{
+    //             const res = await fetch(B)
+    //         }
+    //     }
+    // })
+    // return (
 
-    )
+
+    // )
 }
 export default BoardPage;

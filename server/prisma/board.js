@@ -26,9 +26,21 @@ async function deleteBoard(id) {
   });
 }
 
+async function searchBoardsByTitle(query) {
+  return await prisma.boards.findMany({
+    where: {
+      title: {
+        contains: query,
+        mode: "insensitive",
+      },
+    },
+  });
+}
+
 module.exports = {
   getBoards,
   getBoardById,
   createBoard,
   deleteBoard,
+  searchBoardsByTitle,
 };
