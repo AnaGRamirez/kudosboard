@@ -1,0 +1,24 @@
+.board-page-container {
+   padding: 24px;
+   box-sizing: border-box;
+
+
+
+}
+
+.back-button{
+    position: sticky;
+    top: 30px;
+    left: 30px;
+    z-index: auto;
+    cursor: pointer;
+}
+
+.board-page-header{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+}

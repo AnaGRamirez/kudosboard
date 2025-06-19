@@ -69,3 +69,35 @@ export async function searchBoards(query) {
 
   return await res.json();
 }
+
+export async function fetchCardsByBoardId(boardId) {
+  try {
+    const res = await fetch(`${BASE_URL}/cards/board/${boardId}`);
+    if (!res.ok) {
+      throw error;
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log("cannot fetch the cards", error);
+  }
+}
+
+export async function createCard(data) {
+  const res = await fetch(`${BASE_URL}/cards`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data),
+  });
+  return await res.json();
+}
+
+export async function deleteCard(cardId) {
+  const res = await fetch(`${BASE_URL}/cards`, {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({cardId}),
+  });
+  return await res.json();
+}

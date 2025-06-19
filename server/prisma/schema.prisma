@@ -22,7 +22,7 @@ model Boards {
   author      String?   
   category    String
   createdAt DateTime @default(now())
-
+  cards Cards[] 
 }
 
 
@@ -32,5 +32,6 @@ model Cards {
   gifurl   String 
   upvotes  Int 
   board_id   Int
+  board Boards @relation(fields: [board_id], references:[id])
 
 }
