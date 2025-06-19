@@ -46,13 +46,13 @@ Deployed Application (**required**): [Kudos Board Deployed Site](ADD_LINK_HERE)
 - [ ] **View Board** 
   - [ ] Users can click on a board in the grid view to navigate to a new page containing that board's details.
 - [ ] **Add New Board**
-  - [ ] Users can create a new board on the home page.
-  - [ ] When creating a new board, users can specify the:
-    - [ ] Title (required)
-    - [ ] Category (required)
-    - [ ] Author (optional)
-  - [ ] Items listed as required above must have a value to succesffuly create a new board.
-  - [ ] When the board is successfully created, it appears in the grid of boards. 
+  - [x] Users can create a new board on the home page.
+  - [x] When creating a new board, users can specify the:
+    - [x] Title (required)
+    - [x] Category (required)
+    - [x] Author (optional)
+  - [x] Items listed as required above must have a value to succesffuly create a new board.
+  - [x] When the board is successfully created, it appears in the grid of boards. 
 - [ ] **Delete Board**
   - [ ] User can delete boards on the home page. 
   - [ ] When the board is deleted, the board disappears from the grid of boards. 

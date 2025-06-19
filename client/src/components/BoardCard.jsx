@@ -11,12 +11,16 @@ const BoardCard = ({
   onView,
   onDelete,
 }) => {
-    console.log("card props", {title, category, imgURL});
    const navigate = useNavigate();
 
    const handleView = () => {
     navigate(`/board/${id}`)
+    
+
    }
+
+   //handleDelete
+   
   return (
     <div className="board-card">
         <img src={imgURL} alt={title} className="board-image" />

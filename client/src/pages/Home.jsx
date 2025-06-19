@@ -6,7 +6,7 @@ import BoardGrid from "../components/BoardGrid";
 import Header from "../components/Header";
 import CreateBoardButton from "../components/CreateBoardButton";
 import CreateBoardModal from "../components/CreateBoardModal";
-import {fetchBoards, createBoard} from "../api/BoardApi";
+import {fetchBoards, createBoard, deleteBoard} from "../api/BoardApi";
 import {useEffect} from "react";
 
 const Home = () => {
@@ -38,17 +38,30 @@ const Home = () => {
     console.log("you are searching for ", query);
   };
 
-const handleCreateBoard = (boardDetails) => {
-  const createBoardAsync = async () => {
+  const handleCreateBoard = (boardDetails) => {
+    const createBoardAsync = async () => {
+      try {
+        const createdBoard = await createBoard(boardDetails);
+        setBoards((prevBoards) => [...prevBoards, createdBoard]);
+      } catch (error) {
+        console.error("Error creating board:", error);
+      }
+    };
+    createBoardAsync();
+  };
+
+  const handleDeleteBoard = async (id) => {
+    if (
+      !window.confirm("are you absolutely sure you want to delete this board")
+    )
+      return;
     try {
-      const createdBoard = await createBoard(boardDetails);
-      setBoards((prevBoards) => [...prevBoards, createdBoard]);
+      await deleteBoard(id);
+      setBoards((prev) => prev.filter((board) => board.id !== id));
     } catch (error) {
-      console.error("Error creating board:", error);
+      console.log("error deleting", error);
     }
   };
-  createBoardAsync();
-}
 
   return (
     <div>
@@ -67,7 +80,7 @@ const handleCreateBoard = (boardDetails) => {
         ></CreateBoardModal>
       )}
 
-      <BoardGrid boards={boards}></BoardGrid>
+      <BoardGrid boards={boards} onDelete={handleDeleteBoard}></BoardGrid>
     </div>
   );
 };

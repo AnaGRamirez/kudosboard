@@ -40,3 +40,17 @@ export async function createBoard(data = {boardData}) {
     throw error;
   }
 }
+
+export async function deleteBoard(id) {
+  const res = await fetch(`${BASE_URL}/boards`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({id}),
+  });
+
+  if (!res.ok) {
+    throw error;
+  }
+}

@@ -15,9 +15,8 @@ const CreateBoardModal = ({onClose, onCreate}) => {
       return;
     }
 
-    // TODO: Add submision logic here
     const data = {title, imageurl, author, category};
-    onCreate(data); 
+    onCreate(data);
     onClose();
   };
 

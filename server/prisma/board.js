@@ -16,7 +16,7 @@ async function getBoardById(id) {
 
 async function createBoard(data) {
   return prisma.boards.create({
-    data, //object with the values {titel, imageurl, author, catgory}
+    data, //object with the values {title, imageurl, author, catgory}
   });
 }
 
