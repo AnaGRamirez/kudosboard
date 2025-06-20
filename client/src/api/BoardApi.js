@@ -107,7 +107,7 @@ export async function deleteCard(cardId) {
 }
 
 export async function upvoteCard(cardId) {
-  const res = await fetch("http://localhost:3000/cards/upvote", {
+  const res = await fetch(`${BASE_URL}/cards/upvote`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
