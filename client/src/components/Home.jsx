@@ -97,7 +97,7 @@ const Home = () => {
 
         case "Celebration":
         case "Thank You":
-        case "Inpiration":
+        case "Inspiration":
           filtered = filtered.filter(
             (board) => board.category === selectedCategory
           );
