@@ -1,6 +1,6 @@
 // This files defines the functions to connect backend with frontend
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://kudosboard-ldos.onrender.com";
 
 export async function fetchBoards() {
   const url = `${BASE_URL}/boards`;
