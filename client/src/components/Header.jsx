@@ -7,7 +7,7 @@ const Header = () => {
       </div>
       <div className="header-text">
         <h1 className="title"> KUDOSBOARD</h1>
-        <h3 className="slogan">insert funny and cheesy phrase </h3>
+        <h3 className="slogan">Because life is better when we recognize others </h3>
       </div>
     </header>
   );

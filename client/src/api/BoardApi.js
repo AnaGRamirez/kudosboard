@@ -115,7 +115,7 @@ export async function upvoteCard(card_id) {
 }
 
 export async function togglePinCard(card_id) {
-  const res = await fetch("http://localhost:3000/cards/pin", {
+  const res = await fetch(`${BASE_URL}/cards/pin`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

@@ -115,6 +115,13 @@ const BoardPage = () => {
         onUpvote={handleUpvote}
         onPinToggle={handlePinToggle}
       />
+
+       <footer className="site-footer">
+        <p className="footer-catchphrase">
+          Thanks for stopping by — see you in the terminal!
+        </p>
+        <p>&copy; 2025 Ana Ramirez</p>
+      </footer>
     </div>
   );
 };
