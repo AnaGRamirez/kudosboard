@@ -7,6 +7,7 @@ import {
   deleteCard,
   createCard,
   upvoteCard,
+  togglePinCard,
 } from "../api/BoardApi";
 import "./BoardPage.css";
 
@@ -23,7 +24,8 @@ const BoardPage = () => {
     const getCards = async () => {
       try {
         const allCards = await fetchCardsByBoardId(boardId);
-        setCards(allCards);
+        const sorted = sortCardsByPinStatus(allCards);
+        setCards(sorted);
       } catch (error) {
         console.log("could not fetch the cards", error);
       }
@@ -32,8 +34,7 @@ const BoardPage = () => {
   }, [boardId, cards]);
 
   const handleCreateCard = async (cardDetails) => {
-
-    const {title, gifurl, author} = cardDetails;
+    // const {title, gifurl, author} = cardDetails;
 
     const newCard = await createCard({
       ...cardDetails,
@@ -50,27 +51,42 @@ const BoardPage = () => {
       setCards((prevCards) =>
         prevCards.filter((card) => card.id !== parseInt(cardId))
       );
-      console.log("HAHA", cardId)
+      console.log("HAHA", cardId);
     } catch (error) {
       console.log("error when deleting card", error);
     }
   };
 
   const handleUpvote = async (cardId) => {
-    console.log("elele", cardId)
+    console.log("elele", cardId);
     try {
       const updatedCard = await upvoteCard(cardId);
       setCards((prev) =>
         prev.map((card) =>
-          card.id === cardId ? {...card, upvotes: card.upvotes + 1}: card
+          card.id === cardId ? {...card, upvotes: card.upvotes + 1} : card
         )
       );
+    } catch (error) {
+      console.log("is it here", error);
+    }
+  };
+  const handlePinToggle = async (cardId, newPinnedStatus) => {
+    console.log("what up", newPinnedStatus)
+    try {
+      const updatedCard = await togglePinCard(cardId, newPinnedStatus);
+      setCards((prevCards) =>
+        prevCards.map((card) => (card.id === cardId ? updatedCard : card))
+      );
+    } catch (error) {
+      console.log("failed to pin", error);
+    }
+  };
 
-    }
-  
-     catch (error) {
-      console.log("is it here", error)
-    }
+  const sortCardsByPinStatus = (cards) => {
+    return [...cards].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+    });
   };
 
   return (
@@ -97,6 +113,7 @@ const BoardPage = () => {
         cards={cards}
         onDelete={handleDeleteCard}
         onUpvote={handleUpvote}
+        onPinToggle={handlePinToggle}
       />
     </div>
   );

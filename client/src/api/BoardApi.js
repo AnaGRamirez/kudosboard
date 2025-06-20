@@ -1,7 +1,7 @@
 // This files defines the functions to connect backend with frontend
 
-const BASE_URL = "https://kudosboard-ldos.onrender.com";
-
+// const BASE_URL = "https://kudosboard-ldos.onrender.com";
+const BASE_URL = "http://localhost:3000"
 export async function fetchBoards() {
   const url = `${BASE_URL}/boards`;
   try {
@@ -121,3 +121,21 @@ export async function upvoteCard(cardId) {
   }
   return await res.json();
 }
+
+
+export async function togglePinCard(cardId){
+  const res = await fetch("http://localhost:3000/cards/pin", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({cardId}),
+  });
+
+  if(!res.ok){
+    throw new Error (`pinning failed ${res.statusText}`)
+  }
+  
+  return await res.json();
+
+  }

@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import './CardGrid.css'
 
-const CardGrid = ({cards, onDelete, onUpvote}) => {
+const CardGrid = ({cards, onDelete, onUpvote, onPinToggle}) => {
   const renderCards = () => {
     if (cards.length === 0) {
       return (
@@ -22,8 +22,10 @@ const CardGrid = ({cards, onDelete, onUpvote}) => {
             title={card.title}
             gifurl={card.gifurl}
             upvotes={card.upvotes}
-            onDelete={()=> onDelete(card.id)}
             onUpvote={()=> onUpvote(card.id)}
+            pinned={card.pinned}
+            onDelete={()=> onDelete(card.id)}
+            onPinToggle={()=> onPinToggle(card.id, !card.pinned)}
           ></Card>
         ))}
         </div>

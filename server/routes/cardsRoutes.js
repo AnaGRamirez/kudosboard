@@ -6,6 +6,7 @@ const {
   createCard,
   deleteCard,
   upvoteCard,
+  togglePin,
 } = require("../prisma/card");
 
 router.get("/board/:id", async (req, res) => {
@@ -65,6 +66,20 @@ router.patch("/upvote", async (req, res) => {
     res.status(200).json(updatedCard);
   } catch (error) {
     console.log("error in upvoting card", error);
+  }
+});
+
+router.patch("/pin", async (req, res) => {
+  const {cardId} = req.body;
+  if (!cardId) {
+    return res.status(400).send("Card ID missing");
+  }
+  try {
+    const updated = await togglePin(parseInt(cardId));
+    res.status(200).json(updated);
+  } catch (error) {
+    console.log("could not toggle the pin", error);
+    res.status(500).send(error);
   }
 });
 

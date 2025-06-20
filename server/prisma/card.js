@@ -52,12 +52,30 @@ async function upvoteCard(cardId) {
   } catch (error) {
     console.log("error in updating card", error);
   }
-
 }
+
+async function togglePin(cardId) {
+  const card = await prisma.cards.findUnique({
+    where: { id: parseInt(cardId)},
+  });
+
+  if (!card) {
+    throw new Error("Card not found");
+  }
+
+  const updated = await prisma.cards.update({
+    where: { id: parseInt(cardId) },
+    data: { pinned: !card.pinned, createdAt: new Date() },
+  });
+
+  return updated;
+}
+
 
 module.exports = {
   getCardsByBoardId,
   createCard,
   deleteCard,
   upvoteCard,
+  togglePin,
 };
