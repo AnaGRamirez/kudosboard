@@ -10,6 +10,7 @@ const {
   createBoard,
   deleteBoard,
   searchBoardsByTitle,
+  
 } = require("../prisma/board.js");
 
 router.get("/", async (req, res) => {

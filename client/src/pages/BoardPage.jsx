@@ -26,25 +26,22 @@ const BoardPage = () => {
     getCards();
   }, [boardId, cards]);
 
-  const handleCreateCard = (cardDetails) => {
-    const createCardAsync = async () => {
-      try {
-        const newCard = await createCard({
-          ...cardDetails,
-          board_id: parseInt(boardId),
-        });
-      } catch (error) {
-        console.log("error in creating card", error);
-      }
-    };
-    createCardAsync();
+  const handleCreateCard = async (cardDetails) => {
+    const {title, gifurl, author} = cardDetails;
+    const newCard = await createCard({
+      title: title,
+      gifurl: gifurl,
+      author: author || null,
+      upvotes: 0,
+      board_id: parseInt(boardId),
+    });
+    setCards((prevCards) => [...prevCards, newCard]);
   };
 
   const handleDeleteCard = async (cardId) => {
     try {
       await deleteCard(cardId);
-      console.log(cardId);
-      setCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
+      setCards((prevCards) => prevCards.filter((card) => card.id !== parseInt(cardId)));
     } catch (error) {
       console.log("error when deleting card", error);
     }
@@ -82,7 +79,7 @@ const BoardPage = () => {
         cards={cards}
         onDelete={handleDeleteCard}
         onUpvote={handleUpvote}
-      ></CardGrid>
+/>
     </div>
   );
 };

@@ -21,7 +21,8 @@ async function createCard(data) {
     data: {
       title: data.title,
       gifurl: data.gifurl,
-      upvotes: data.upvotes,
+      author: data.author || null,
+      upvotes: data.upvotes || 0,
       board_id: parseInt(data.board_id),
     },
   });
@@ -34,6 +35,8 @@ async function deleteCard(cardId) {
     },
   });
 }
+
+// upvote helper 
 module.exports = {
   getCardsByBoardId,
   createCard,

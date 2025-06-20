@@ -14,9 +14,14 @@ router.get("/board/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {title, gifurl, board_id, upvotes} = req.body;
+  const {title, gifurl, author, upvotes, board_id} = req.body;
+  if (!title || !gifurl || !board_id){
+
+    console.log("required fields missing")
+    return res.status(400).send()
+  }
   try {
-    const newCard = await createCard({title, gifurl, board_id, upvotes});
+    const newCard = await createCard({title, gifurl, board_id, author, upvotes});
     res.status(201).send(newCard);
   } catch (error) {
     console.log("error in creating a card", error);
@@ -37,4 +42,23 @@ router.delete("/", async (req, res) => {
     res.status(500).send();
   }
 });
+
+
+
+// router.post("upvote/", async (req, res) => {
+//   const {card_id} = req.body;
+
+//   if (!card_id){
+//     return res.status(400).send()
+//   }
+//   try {
+//     const newCard = await createCard({title, gifurl, board_id, author, upvotes});
+//     res.status(201).send(newCard);
+//   } catch (error) {
+//     console.log("error in creating a card", error);
+//     res.status(500).send();
+//   }
+// });
+
+
 module.exports = router;

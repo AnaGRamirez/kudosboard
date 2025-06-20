@@ -29,7 +29,8 @@ model Boards {
 model Cards {
   id Int    @id @default(autoincrement())
   title    String
-  gifurl   String 
+  gifurl   String
+  author   String?
   upvotes  Int 
   board_id   Int
   board Boards @relation(fields: [board_id], references:[id])
