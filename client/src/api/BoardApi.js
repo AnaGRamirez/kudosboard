@@ -83,20 +83,18 @@ export async function fetchCardsByBoardId(boardId) {
     console.log("cannot fetch the cards", error);
   }
 }
-export async function createCard({ title, gifurl, author, upvotes, board_id }) {
+export async function createCard({title, gifurl, author, upvotes, board_id}) {
   const res = await fetch(`${BASE_URL}/cards`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, gifurl, author, upvotes, board_id }),
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({title, gifurl, author, upvotes, board_id}),
   });
 
-  
-    if (!res.ok) {
+  if (!res.ok) {
     throw new Error(`Failed to create card: ${res.status} ${res.statusText}`);
   }
   return await res.json();
 }
-
 
 export async function deleteCard(cardId) {
   const res = await fetch(`${BASE_URL}/cards`, {
@@ -105,7 +103,23 @@ export async function deleteCard(cardId) {
     body: JSON.stringify({cardId}),
   });
 
-  return await res.json();
+  return;
 }
 
+export async function upvoteCard(cardId) {
+  const res = await fetch(`http://localhost:3000/cards/upvote`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({cardId}),
+  });
 
+
+  if(!res.ok){
+    const error = await res.text();
+    console.log("this was error from upvote", error);
+    throw new Error(`upvote failed" ${res.status} ${res.statusText}`)
+  }
+  return await res.json();
+}

@@ -36,9 +36,28 @@ async function deleteCard(cardId) {
   });
 }
 
-// upvote helper 
+// upvote helper
+
+async function upvoteCard(cardId) {
+  try {
+    const updatedCard = await prisma.cards.update({
+      where: {id: parseInt(cardId)},
+      data: {
+        upvotes: {
+          increment: 1,
+        },
+      },
+    });
+    return updatedCard;
+  } catch (error) {
+    console.log("error in updating card", error);
+  }
+
+}
+
 module.exports = {
   getCardsByBoardId,
   createCard,
   deleteCard,
+  upvoteCard,
 };

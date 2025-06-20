@@ -10,7 +10,7 @@ const Card = ({ id, title, gifurl, upvotes, onUpvote, onDelete}) => {
         <h3>{title}</h3>
         <p>{upvotes}</p>
         <div className="buttons">
-          <button onClick={onDelete}>Upvote</button>
+          <button onClick={onUpvote}>Upvote</button>
 
           <button onClick={onDelete}>Delete</button>
         </div>

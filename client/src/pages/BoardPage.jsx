@@ -2,7 +2,12 @@ import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import CardGrid from "../components/CardGrid";
 import CreateCardModal from "../components/CreateCardModal";
-import {fetchCardsByBoardId, deleteCard, createCard} from "../api/BoardApi";
+import {
+  fetchCardsByBoardId,
+  deleteCard,
+  createCard,
+  upvoteCard,
+} from "../api/BoardApi";
 import "./BoardPage.css";
 
 const BoardPage = () => {
@@ -12,7 +17,7 @@ const BoardPage = () => {
   const Navigate = useNavigate();
 
   const handleBack = () => {
-    Navigate("/home");
+    Navigate("/");
   };
   useEffect(() => {
     const getCards = async () => {
@@ -27,32 +32,45 @@ const BoardPage = () => {
   }, [boardId, cards]);
 
   const handleCreateCard = async (cardDetails) => {
+
     const {title, gifurl, author} = cardDetails;
+
     const newCard = await createCard({
-      title: title,
-      gifurl: gifurl,
-      author: author || null,
+      ...cardDetails,
       upvotes: 0,
       board_id: parseInt(boardId),
     });
+    console.log("new card", newCard);
     setCards((prevCards) => [...prevCards, newCard]);
   };
 
   const handleDeleteCard = async (cardId) => {
     try {
       await deleteCard(cardId);
-      setCards((prevCards) => prevCards.filter((card) => card.id !== parseInt(cardId)));
+      setCards((prevCards) =>
+        prevCards.filter((card) => card.id !== parseInt(cardId))
+      );
+      console.log("HAHA", cardId)
     } catch (error) {
       console.log("error when deleting card", error);
     }
   };
 
-  const handleUpvote = (cardId) => {
-    setCards((prev) =>
-      prev.map((card) =>
-        card.id === cardId ? {...card, upvotes: card.upvotes + 1} : card
-      )
-    );
+  const handleUpvote = async (cardId) => {
+    console.log("elele", cardId)
+    try {
+      const updatedCard = await upvoteCard(cardId);
+      setCards((prev) =>
+        prev.map((card) =>
+          card.id === cardId ? {...card, upvotes: card.upvotes + 1}: card
+        )
+      );
+
+    }
+  
+     catch (error) {
+      console.log("is it here", error)
+    }
   };
 
   return (
@@ -79,7 +97,7 @@ const BoardPage = () => {
         cards={cards}
         onDelete={handleDeleteCard}
         onUpvote={handleUpvote}
-/>
+      />
     </div>
   );
 };

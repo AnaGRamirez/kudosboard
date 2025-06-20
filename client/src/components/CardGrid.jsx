@@ -16,6 +16,7 @@ const CardGrid = ({cards, onDelete, onUpvote}) => {
       <div className="card-grid-container">
         <div className="card-grid">
   {cards.map((card) => (
+
           <Card
             key={card.id}
             title={card.title}
