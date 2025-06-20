@@ -92,6 +92,7 @@ const Home = () => {
           filtered.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
+          filtered = filtered.slice(0, 6);
 
           break;
 
