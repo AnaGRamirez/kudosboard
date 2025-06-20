@@ -12,7 +12,7 @@ import {
 import "./BoardPage.css";
 
 const BoardPage = () => {
-  const {boardId} = useParams();
+  const {board_id} = useParams();
   const [cards, setCards] = useState([]);
   const [showCreateCardModal, setShowCreateCardModal] = useState(false);
   const Navigate = useNavigate();
@@ -23,7 +23,7 @@ const BoardPage = () => {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const allCards = await fetchCardsByBoardId(boardId);
+        const allCards = await fetchCardsByBoardId(board_id);
         const sorted = sortCardsByPinStatus(allCards);
         setCards(sorted);
       } catch (error) {
@@ -31,51 +31,51 @@ const BoardPage = () => {
       }
     };
     getCards();
-  }, [boardId, cards]);
+  }, [board_id, cards]);
 
   const handleCreateCard = async (cardDetails) => {
-    // const {title, gifurl, author} = cardDetails;
+    const {title, gifurl, author} = cardDetails;
 
     const newCard = await createCard({
       ...cardDetails,
       upvotes: 0,
-      board_id: parseInt(boardId),
+      board_id: parseInt(board_id),
     });
     console.log("new card", newCard);
-    setCards((prevCards) => [...prevCards, newCard]);
+    setCards((previousCards) => [...previousCards, newCard]);
   };
 
-  const handleDeleteCard = async (cardId) => {
+  const handleDeleteCard = async (card_id) => {
     try {
-      await deleteCard(cardId);
-      setCards((prevCards) =>
-        prevCards.filter((card) => card.id !== parseInt(cardId))
+      await deleteCard(card_id);
+      setCards((previousCards) =>
+        previousCards.filter((card) => card.id !== parseInt(card_id))
       );
-      console.log("HAHA", cardId);
+      console.log("HAHA", card_id);
     } catch (error) {
       console.log("error when deleting card", error);
     }
   };
 
-  const handleUpvote = async (cardId) => {
-    console.log("elele", cardId);
+  const handleUpvote = async (card_id) => {
+    console.log("elele", card_id);
     try {
-      const updatedCard = await upvoteCard(cardId);
-      setCards((prev) =>
-        prev.map((card) =>
-          card.id === cardId ? {...card, upvotes: card.upvotes + 1} : card
+      const updatedCard = await upvoteCard(card_id);
+      setCards((previousCards) =>
+        previousCards.map((card) =>
+          card.id === card_id ? {...card, upvotes: card.upvotes + 1} : card
         )
       );
     } catch (error) {
       console.log("is it here", error);
     }
   };
-  const handlePinToggle = async (cardId, newPinnedStatus) => {
-    console.log("what up", newPinnedStatus)
+  const handlePinToggle = async (card_id, newPinnedStatus) => {
+    console.log("what up", newPinnedStatus);
     try {
-      const updatedCard = await togglePinCard(cardId, newPinnedStatus);
+      const updatedCard = await togglePinCard(card_id, newPinnedStatus);
       setCards((prevCards) =>
-        prevCards.map((card) => (card.id === cardId ? updatedCard : card))
+        prevCards.map((card) => (card.id === card_id ? updatedCard : card))
       );
     } catch (error) {
       console.log("failed to pin", error);
@@ -95,7 +95,7 @@ const BoardPage = () => {
         ← Home
       </button>
       <div className="board-page-header">
-        <h3> Board {boardId}</h3>
+        <h3> Board {board_id}</h3>
         <button
           className="create-card-button"
           onClick={() => setShowCreateCardModal(true)}

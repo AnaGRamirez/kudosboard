@@ -1,6 +1,8 @@
+//
+// //imports
+//
 const express = require("express");
 const router = express.Router();
-
 const {
   getCardsByBoardId,
   createCard,
@@ -9,10 +11,14 @@ const {
   togglePin,
 } = require("../prisma/card");
 
+
+//
+// Routes for cards
+//
 router.get("/board/:id", async (req, res) => {
-  const boardId = parseInt(req.params.id);
+  const board_id = parseInt(req.params.id);
   try {
-    const cards = await getCardsByBoardId(boardId);
+    const cards = await getCardsByBoardId(board_id);
     res.json(cards);
   } catch (error) {
     res.status(500).send();
@@ -23,7 +29,7 @@ router.post("/", async (req, res) => {
   const {title, gifurl, author, upvotes, board_id} = req.body;
 
   if (!title || !gifurl || !board_id) {
-    console.log("required fields missing");
+    console.log("required fields missing", title, gifurl, board_id);
     return res.status(400).send();
   }
   try {
@@ -42,13 +48,13 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/", async (req, res) => {
-  const {cardId} = req.body;
-  if (!cardId) {
+  const {card_id} = req.body;
+  if (!card_id) {
     return res.status(400).send();
   }
   try {
-    await deleteCard(parseInt(cardId));
-    res.status(200).send();
+    await deleteCard(parseInt(card_id));
+    res.status(204).send();
   } catch (error) {
     console.log("error in deleting cards", error);
     res.status(500).send();
@@ -56,13 +62,13 @@ router.delete("/", async (req, res) => {
 });
 
 router.patch("/upvote", async (req, res) => {
-  const {cardId} = req.body;
+  const {card_id} = req.body;
 
-  if (!cardId) {
+  if (!card_id) {
     return res.status(400).send();
   }
   try {
-    const updatedCard = await upvoteCard(cardId);
+    const updatedCard = await upvoteCard(card_id);
     res.status(200).json(updatedCard);
   } catch (error) {
     console.log("error in upvoting card", error);
@@ -70,12 +76,12 @@ router.patch("/upvote", async (req, res) => {
 });
 
 router.patch("/pin", async (req, res) => {
-  const {cardId} = req.body;
-  if (!cardId) {
+  const {card_id} = req.body;
+  if (!card_id) {
     return res.status(400).send("Card ID missing");
   }
   try {
-    const updated = await togglePin(parseInt(cardId));
+    const updated = await togglePin(parseInt(card_id));
     res.status(200).json(updated);
   } catch (error) {
     console.log("could not toggle the pin", error);

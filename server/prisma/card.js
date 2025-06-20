@@ -1,14 +1,9 @@
-const express = require("express");
-const router = express.Router();
-
 prisma = require("../prisma/client");
 
-prisma = require("../prisma/client");
-
-async function getCardsByBoardId(boardId) {
+async function getCardsByBoardId(board_id) {
   return await prisma.cards.findMany({
     where: {
-      board_id: boardId,
+      board_id: board_id,
     },
     orderBy: {
       id: "asc",
@@ -28,20 +23,18 @@ async function createCard(data) {
   });
 }
 
-async function deleteCard(cardId) {
+async function deleteCard(card_id) {
   return await prisma.cards.delete({
     where: {
-      id: parseInt(cardId),
+      id: parseInt(card_id),
     },
   });
 }
 
-// upvote helper
-
-async function upvoteCard(cardId) {
+async function upvoteCard(card_id) {
   try {
     const updatedCard = await prisma.cards.update({
-      where: {id: parseInt(cardId)},
+      where: {id: parseInt(card_id)},
       data: {
         upvotes: {
           increment: 1,
@@ -54,9 +47,9 @@ async function upvoteCard(cardId) {
   }
 }
 
-async function togglePin(cardId) {
+async function togglePin(card_id) {
   const card = await prisma.cards.findUnique({
-    where: { id: parseInt(cardId)},
+    where: {id: parseInt(card_id)},
   });
 
   if (!card) {
@@ -64,13 +57,12 @@ async function togglePin(cardId) {
   }
 
   const updated = await prisma.cards.update({
-    where: { id: parseInt(cardId) },
-    data: { pinned: !card.pinned, createdAt: new Date() },
+    where: {id: parseInt(card_id)},
+    data: {pinned: !card.pinned, createdAt: new Date()},
   });
 
   return updated;
 }
-
 
 module.exports = {
   getCardsByBoardId,

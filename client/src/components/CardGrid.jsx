@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import './CardGrid.css'
+import "./CardGrid.css";
 
 const CardGrid = ({cards, onDelete, onUpvote, onPinToggle}) => {
   const renderCards = () => {
@@ -15,26 +15,23 @@ const CardGrid = ({cards, onDelete, onUpvote, onPinToggle}) => {
     return (
       <div className="card-grid-container">
         <div className="card-grid">
-  {cards.map((card) => (
-
-          <Card
-            key={card.id}
-            title={card.title}
-            gifurl={card.gifurl}
-            upvotes={card.upvotes}
-            onUpvote={()=> onUpvote(card.id)}
-            pinned={card.pinned}
-            onDelete={()=> onDelete(card.id)}
-            onPinToggle={()=> onPinToggle(card.id, !card.pinned)}
-          ></Card>
-        ))}
+          {cards.map((card) => (
+            <Card
+              key={card.id}
+              title={card.title}
+              gifurl={card.gifurl}
+              upvotes={card.upvotes}
+              onUpvote={() => onUpvote(card.id)}
+              pinned={card.pinned}
+              onDelete={() => onDelete(card.id)}
+              onPinToggle={() => onPinToggle(card.id, !card.pinned)}
+            ></Card>
+          ))}
         </div>
-      
       </div>
     );
   };
   return renderCards();
 };
-
 
 export default CardGrid;

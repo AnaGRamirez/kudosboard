@@ -1,15 +1,17 @@
-import React, {useState} from "react";
-
-import BoardFilter from './BoardFilter'
-import SearchBar from './SearchBar';
-import BoardCard from "./BoardCard";
-import BoardGrid from './BoardGrid';
-
+import React, {useState, useEffect} from "react";
+import BoardFilter from "./BoardFilter";
+import SearchBar from "./SearchBar";
+import BoardGrid from "./BoardGrid";
 import Header from "./Header";
 import CreateBoardButton from "./CreateBoardButton";
 import CreateBoardModal from "./CreateBoardModal";
-import {fetchBoards, createBoard, deleteBoard, searchBoards} from "../api/BoardApi";
-import {useEffect} from "react";
+
+import {
+  fetchBoards,
+  createBoard,
+  deleteBoard,
+  searchBoards,
+} from "../api/BoardApi";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -38,19 +40,17 @@ const Home = () => {
 
   // gotta have a state after backend is ready to save the boards;
   const handleSearch = async (query) => {
-
     setSearchQuery(query);
 
-    if (query.trim() ===""){
+    if (query.trim() === "") {
       setBoards(allBoards);
       return;
     }
 
-    try{
+    try {
       const results = await searchBoards(query);
       setBoards(results);
-    }
-    catch(error){
+    } catch (error) {
       console.log("couldn't search", error);
     }
   };

@@ -1,33 +1,32 @@
 .board-filter {
-    display: flex;
-    overflow-x: auto;
-    padding: 1rem 0.5rem;
-    border-radius: 999px;
-    gap: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    margin: 1rem auto;
-    width: fit-content;
-    scrollbar-width: none;
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0.5rem;
+  border-radius: 999px;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin: 1rem auto;
+  width: fit-content;
+  scrollbar-width: none;
 }
 
-.board-filter::-webkit-scrollbar{
-    display: none;
+.board-filter::-webkit-scrollbar {
+  display: none;
 }
-.filter{
-    background: transparent;
-    margin: 5px;
-    font-size: 0.95rem;
-    color: #374151;
-    padding: 0.4rem 1.2rem;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.filter {
+  background: transparent;
+  margin: 5px;
+  font-size: 0.95rem;
+  color: #374151;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .filter:hover {
-
-    background-color: #2563eb;
-    color:white;
-    border:none;
+  background-color: #2563eb;
+  color: white;
+  border: none;
 }

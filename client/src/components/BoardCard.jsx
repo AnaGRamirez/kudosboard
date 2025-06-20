@@ -1,36 +1,29 @@
 import React from "react";
- import {Link} from 'react-router-dom';
+import {Link} from "react-router-dom";
 import "./BoardCard.css";
-import BoardPage from "../pages/BoardPage";
-import { useNavigate } from "react-router-dom";
-const BoardCard = ({
-  id,
-  title,
-  category,
-  imgURL,
-  onView,
-  onDelete,
-}) => {
-   const navigate = useNavigate();
+import {useNavigate} from "react-router-dom";
+const BoardCard = ({id, title, category, imgURL, onDelete}) => {
+  const navigate = useNavigate();
 
-   const handleView = () => {
-    navigate(`/board/${id}`)
-    
+  const handleView = () => {
+    navigate(`/board/${id}`);
+  };
 
-   }
 
-   //handleDelete
-   
   return (
     <div className="board-card">
-        <img src={imgURL} alt={title} className="board-image" />
+      <img src={imgURL} alt={title} className="board-image" />
 
       <div className="board-content">
         <h2 className="board-title">{title}</h2>
         <span className="board-category"> {category} </span>
 
         <div className="board-actions">
-          <Link to={`/boards/${id}`} className="view-button" onClick={handleView}>
+          <Link
+            to={`/boards/${id}`}
+            className="view-button"
+            onClick={handleView}
+          >
             View
           </Link>
           <button className="delete-button" onClick={onDelete}>

@@ -1,8 +1,8 @@
+//
+// //imports
+//
 const express = require("express");
 const router = express.Router();
-
-prisma = require("../prisma/client");
-
 prisma = require("../prisma/client");
 const {
   getBoards,
@@ -10,9 +10,10 @@ const {
   createBoard,
   deleteBoard,
   searchBoardsByTitle,
-  
 } = require("../prisma/board.js");
-
+//
+// Routes for boards
+//
 router.get("/", async (req, res) => {
   try {
     const boards = await getBoards();
@@ -25,10 +26,10 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
+  const board_id = req.params.id;
   console.log("thisss rann");
   try {
-    const board = await getBoardById(id);
+    const board = await getBoardById(board_id);
     if (board) {
       res.json(board);
     } else {
@@ -51,14 +52,14 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/", async (req, res) => {
-  const {id} = req.body;
+  const {board_id} = req.body;
 
-  if (!id) {
+  if (!board_id) {
     return res.status(400).send("can't delete without id");
   }
   try {
-    await deleteBoard(id);
-    res.status(200).send("board deleteed");
+    await deleteBoard(board_id);
+    res.status(204).send("board deleteed");
   } catch (error) {
     res.status(500).send("could not delete this board", error);
   }

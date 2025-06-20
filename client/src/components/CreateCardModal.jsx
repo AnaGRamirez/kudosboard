@@ -30,91 +30,87 @@ const CreateCardModal = ({onClose, onCreate}) => {
       alert("please enter required data");
       return;
     }
-  
-      const newCard = {
-        title,
-        gifurl,
-        author,
 
-      };
-      onCreate(newCard);
-      onClose();
-
+    const newCard = {
+      title,
+      gifurl,
+      author,
+    };
+    onCreate(newCard);
+    onClose();
   };
 
   return (
     <div className="modal-overlay">
-        <div className="create-card-modal">
-      <div className="modal-card">
-        <button className="close-button" onClick={onClose}>
-          X
-        </button>
-        <h2>Create a Card</h2>
-        <form className="create-card-form" onSubmit={handleSubmit}>
-          {/* message */}
-          <label>
-            Message:
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </label>
-          {/* author */}
-          <label>
-            Author (optional):
-            <input
-              type="text"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-            ></input>
-          </label>
-          {/* search for a gif */}
-          <label>
-            Search for a Gif (or paste one below)
-            <input
-              type="text"
-              placeholder="happy, cat, dancing..."
-              value={gifQuery}
-              onChange={(e) => setGifQuery(e.target.value)}
-            ></input>
-          </label>
-          <div className="gif-results">
-            {gifResults.map((gif) => {
+      <div className="create-card-modal">
+        <div className="modal-card">
+          <button className="close-button" onClick={onClose}>
+            X
+          </button>
+          <h2>Create a Card</h2>
+          <form className="create-card-form" onSubmit={handleSubmit}>
+            {/* message */}
+            <label>
+              Message:
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </label>
+            {/* author */}
+            <label>
+              Author (optional):
+              <input
+                type="text"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+              ></input>
+            </label>
+            {/* search for a gif */}
+            <label>
+              Search for a Gif (or paste one below)
+              <input
+                type="text"
+                placeholder="happy, cat, dancing..."
+                value={gifQuery}
+                onChange={(e) => setGifQuery(e.target.value)}
+              ></input>
+            </label>
+            <div className="gif-results">
+              {gifResults.map((gif) => {
                 const isSelected = gif.images.fixed_height.url === gifurl;
                 return (
-              <img
-                key={gif.id}
-                src={gif.images.fixed_height.url}
-                alt={gif.title}
-                className={`gif-option ${isSelected? "selected": ""}`}
-                onClick={() => setGifurl(gif.images.fixed_height.url)}
-              ></img>
-            )})}
-          </div>
+                  <img
+                    key={gif.id}
+                    src={gif.images.fixed_height.url}
+                    alt={gif.title}
+                    className={`gif-option ${isSelected ? "selected" : ""}`}
+                    onClick={() => setGifurl(gif.images.fixed_height.url)}
+                  ></img>
+                );
+              })}
+            </div>
 
-          <label>
-            paste a GIF URL
-            <input
-              type="text"
-              value={gifurl}
-              onChange={(e) => {
-             setGifurl(e.target.value);
-              }}
-            ></input>
-          </label>
+            <label>
+              paste a GIF URL
+              <input
+                type="text"
+                value={gifurl}
+                onChange={(e) => {
+                  setGifurl(e.target.value);
+                }}
+              ></input>
+            </label>
 
-          <div className="create-card-modal-buttons">
-            <button type="submit">Add Card</button>
-          </div>
-        </form>
+            <div className="create-card-modal-buttons">
+              <button type="submit">Add Card</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-
-    </div>
-
-  
   );
 };
 
