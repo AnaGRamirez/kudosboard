@@ -107,7 +107,7 @@ export async function deleteCard(cardId) {
 }
 
 export async function upvoteCard(cardId) {
-  const res = await fetch(`http://localhost:3000/cards/upvote`, {
+  const res = await fetch("http://localhost:3000/cards/upvote", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -115,9 +115,7 @@ export async function upvoteCard(cardId) {
     body: JSON.stringify({cardId}),
   });
 
-
   if(!res.ok){
-    const error = await res.text();
     console.log("this was error from upvote", error);
     throw new Error(`upvote failed" ${res.status} ${res.statusText}`)
   }

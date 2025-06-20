@@ -33,9 +33,9 @@ router.post("/", async (req, res) => {
       author,
       upvotes,
     });
-    res.status(201).send(newCard);
+    res.status(201).json(newCard);
   } catch (error) {
-    console.log("error in creating a card", error);
+    console.log("e  rror in creating a card", error);
     res.status(500).send();
   }
 });
@@ -62,13 +62,10 @@ router.patch("/upvote", async (req, res) => {
   }
   try {
     const updatedCard = await upvoteCard(cardId);
-    console.log("elele", updatedCard)
-    res.status(200).send(updatedCard);
-
+    res.status(200).json(updatedCard);
   } catch (error) {
     console.log("error in upvoting card", error);
   }
-
 });
 
 module.exports = router;
