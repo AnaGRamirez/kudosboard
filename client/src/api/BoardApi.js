@@ -1,6 +1,5 @@
-// const BASE_URL = "https://kudosboard-ldos.onrender.com";
+const BASE_URL = "https://kudosboard-ldos.onrender.com";
 
-const BASE_URL = "http://localhost:3000";
 
 // makeApiRequest: Makes a request to the API endpoint.
 // params:
